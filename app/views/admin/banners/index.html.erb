@@ -1,0 +1,33 @@
+
+<div class="account-box">
+<table class="table table-hover table-bordered table-responsive">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>轮播顺序</td>
+      <td>轮播图片</td>
+      <td>配图文字</td>
+      <td>修改轮播</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @banners.each do |banner| %>
+      <tr>
+        <td><%= banner.id %></td>
+        <td><%= banner.name %></td>
+        <td>
+          <% if banner.pic.present? %>
+            <%= image_tag(banner.pic, class: "thumbnail minipic") %>
+          <% else %>
+            <%= image_tag("http://placehold.it/200x200&text=No Pic", class:"thumbnail") %>
+          <% end %>
+        </td>
+        <td><%= raw banner.title %></td>
+        <td><%= link_to("Edit", edit_admin_banner_path(banner)) %></td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

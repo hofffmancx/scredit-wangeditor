@@ -1,0 +1,96 @@
+<style>
+/*right.html*/
+.place{height:45px; background:#ffffff; border-bottom: solid 1px #f1f1f1;border-top: solid 1px #f1f1f1;}
+.place span{line-height:45px; font-size:14px; font-weight:400;float:left; font-family:"微软雅黑"; color:#3e4569;}
+.place span .fa { margin-right:5px; font-size:16px;}
+.placeul .big {}
+.placeul .line { padding:0 6px; display:inline-block; color:#bbb;}
+.placeul li{float:left; line-height:50px; padding-left:7px; padding-right:12px;/*background:url(../images/rlist.gif) no-repeat right;*/}
+.placeul li:last-child{background:none;}
+.account-box .table > tbody > tr > td { vertical-align: middle;}
+.account-box .table .thumbnail { margin-bottom: 0px; }
+.account-box .table > thead > tr > td {font-size: 14px;}
+.account-maintitle {padding-left:30px;font-size:24px; line-height:72px;background-color:#ffffff;border:solid 1px #f1f1f1;}
+.account-btn {margin-bottom:10px;}
+.bg-table {background-color:#ffffff;border:solid 2px #eee;}
+.bg-pagebox {text-align: center;margin-top: 50px;}
+</style>
+
+<div class="account-box" >
+  <!-- 主标题 -->
+  <div class="account-maintitle">
+    <i class="fa fa-paper-plane-o" style="padding-right:8px;"></i>移民国家列表
+  </div>
+
+  <!-- 副标题 -->
+  <div class="place">
+      <span></span>
+      <ul class="placeul">
+          <li><span><i class="fa fa-map-marker"></i>移民国家管理</span>
+              <span class="line">/</span> <span>移民国家列表</span>
+          </li>
+      </ul>
+  </div>
+
+  <!-- "增加国家"按钮 -->
+  <br>
+  <div class="account-btn">
+    <%= link_to(new_admin_product_path,:class=> "btn btn-primary" )  do %>
+      <i class="fa fa-plus"></i>添加国家
+    <% end %>
+  </div>
+
+
+  <!-- 所有国家列表 -->
+  <table class="table table-hover table-striped table-advance table-responsive bg-table">
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>封面</td>
+        <td>所属分类</td>
+        <td>国家名称</td>
+
+        <!-- <td>描述</td> -->
+
+        <td>操作</td>
+        <td>更新时间</td>
+        <td>查看项目</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td>
+            <%= link_to product_path(product) do%>
+              <% if product.image.present? %>
+                <%= image_tag(product.image.avatar.url, class: "thumbnail") %>
+              <% else %>
+                <%= image_tag("http://placehold.it/90x60&text=No Pic", class:"thumbnail") %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= CountryCategory.find(product.country_category_id).title %></td>
+          <!-- <td><%= product.country_category.title %></td> -->
+          <td><%= link_to(product.title, product_path(product)) %></td>
+          <!-- <td><%= simple_format(product.description) %></td> -->
+
+          <td>
+            <%= link_to("Edit", edit_admin_product_path(product)) %> |
+            <%= link_to("destroy", admin_product_path(product), method: :delete, data: { confirm: "你确定要删除吗？"}) %>
+        
+            <%= link_to "向上", move_up_admin_product_path(product), method: :patch %>
+            <%= link_to "向下", move_down_admin_product_path(product), method: :patch %>
+          </td>
+          <td><%= product.updated_at %></td>
+          <td><%= link_to("查看项目", admin_product_path(product))%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+  <div class="bg-pagebox">
+     <%= will_paginate @products, renderer: BootstrapPagination::Rails, :previous_label => t('previous'), :next_label => t('next') %>
+   </div>
+</div>

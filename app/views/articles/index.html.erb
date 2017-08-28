@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="decorative_picture col-md-12" >
+    <%= image_tag("https://i.loli.net/2017/08/01/59800a81e044f.png", class: "img-responsive center-block") %>
+  </div>
+</div>
+
+<div class="container"  style="margin-top:30px;">
+  <div class="row">
+
+    <div class="articleall-block">
+    <!---  尚德信企业资讯  --->
+    <div class="articleall-block-border">
+      <div class="articleall-block-title">
+       <%= ArticleCategory.find(@article_category_id).name %>
+      </div>
+    </div>
+
+
+    <% @articles.each do |article| %>
+      <div class="article-all col-md-6 container">
+        <div class="article-box row">
+
+            <div class="">
+              <!-- 文章列表图片 -->
+              <div class="col-md-5 all_image_css">
+                <% if article.image.present? %>
+                  <%= link_to image_tag(article.image.articleimg.url,size: "640x400", class: "product-list-style-img img-responsive"), article_path(article) %>
+                <% else %>
+                  <%= link_to image_tag("http://placehold.it/600x400&text=No Pic", class: "product-list-style-img img-responsive"), article_path(article)%>
+                <% end %>
+              </div>
+
+              <!-- 文章列表标题、作者、日期 -->
+              <div class="col-md-7">
+                <%= link_to(article.title, article_path(article), class: "article-index-title") %>
+                <div class="article-user row">
+                  <div class="col-md-6">
+                    <span> <%= article.user.display_name %></span>
+                  </div>
+                  <div class="col-md-6">
+                    <span> <%= article.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+        </div>
+        <hr>
+      </div>
+
+    <% end %>
+   </div>
+
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="product-show" style="overflow:hidden;">
+
+  <!-- 主图 -->
+  <div class="col-md-4">
+    <% if @product.image.present? %>
+      <%= image_tag(@product.image.medium.url, class: "thumbnail img-width") %>
+    <% else %>
+      <%= image_tag("http://placehold.it/00x400&text=No Pic", class: "thumbnail img-responsive") %>
+    <% end %>
+  </div>
+
+  <!-- 商品信息 -->
+  <div class="col-md-8">
+
+    <!-- 商品标题 -->
+    <h3 class="product-title" style="color:#666;"><%= @product.title %></h3>
+
+    <!-- 商品简述 -->
+    <div class="product-description" style="font-size:1.2em;color:#7f8c8d;">
+
+        <%= simple_format(@product.description) %>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- 项目列表区 -->
+<div class="text-center project-list-bar">
+
+
+
+<div class="project-list-bar-title">
+  项目
+</div>
+
+<div class="" style="position:absolute;left:38px;top:40px;;">
+  <img src="https://i.loli.net/2017/08/04/5984301949724.png" alt="" class="img-responsive">
+</div>
+
+</div>
+
+
+<div class="all-product-box">
+  <!-- <div class="row"> -->
+
+    <% @projects.each do |project| %>
+      <div class="col-xs-12 col-md-4 product-list-style  center-block all_image_css">
+        <div class="" style="">
+
+
+        <% if project.image.present? %>
+          <%=link_to image_tag(project.image.medium.url,class: "img-width"),product_project_path(@product, project),target: "_blank" %>
+
+        <% else %>
+         <%= link_to image_tag("http://placehold.it/300x300&text=No Pic", class: "img-width"), product_project_path(@product, project), target: "_blank"  %>
+        <% end %>
+        </div>
+        <div class="project-list-title" style="project-list-title">
+          <%= project.title %>
+          <div class="project-list-titile-ico">
+
+          </div>
+        </div>
+        <div class="project-list-subtits">
+          <%= project.content %>
+        </div>
+        <div class="project-list-position">
+            所属国家：<i class="fa fa-map-marker" style="width:20px;"></i>美国
+        </div>
+      </div>
+    <% end %>
+
+  <!-- </div> -->
+</div>
+
+
+
+<!-- 项目列表区 结束 -->
+
+<!-- </div> -->
