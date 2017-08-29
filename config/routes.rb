@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'comments', to: 'welcome#index'
   post 'comments', to: 'welcome#create'
 
+  get 'pictures/upload'
+  post '/upload', to: 'pictures#upload', as: 'upload'
+
 
   root 'welcome#index'
 
