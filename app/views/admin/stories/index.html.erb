@@ -27,8 +27,6 @@
       <% @stories.each do |story| %>
         <tr>
           <td><%= story.id %></td>
-          <!-- <td><%= story.product_id %></td> -->
-          <td><%= Product.find(story.product_id).title %></td>
           <td>
             <%= link_to story_path(story) do%>
               <% if story.image.present? %>
