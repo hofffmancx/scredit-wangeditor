@@ -10,7 +10,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
 
   if Rails.env.production? #远端
-   storage :fog
+   storage :qiniu
  elsif Rails.env.development? #本地
    storage :file
  end
@@ -18,7 +18,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    Time.now.strftime('%Y%m%d').to_s
   end
 
   process resize_to_fit: [800, 800]
