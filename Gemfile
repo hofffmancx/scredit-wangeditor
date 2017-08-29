@@ -44,7 +44,7 @@ gem "rails-erd"
 gem 'carrierwave-qiniu'
 gem 'qiniu-rs'
 
-gem 'fog'
+#gem 'fog'
 gem 'figaro'
 
 # 分页
