@@ -2,10 +2,42 @@
   <div class="form-group">
     <%= f.input :title, :label => "标题" %>
 
-    <%= f.input :description, as: :wysihtml5, :label => "内容" %>
-    
+    <%= f.input :description, :label => "内容", input_html: { style: 'height:400px;max-height:500px;' } %>
+
     <hr>
 
   </div>
   <%= f.submit "提交", class: "btn btn-sm btn-default", data: {disable_with: "Submiting..."} %>
 <% end %>
+
+<script>
+var editor = new wangEditor('companyprofile_description')
+editor.config.menus = [
+  'bold',
+  'underline',
+  'italic',
+  'strikethrough',
+  'forecolor',
+  '|',
+  'quote',
+  'fontfamily',
+  'fontsize',
+  'head',
+  'unorderlist',
+  'orderlist',
+  'alignleft',
+  'aligncenter',
+  'alignright',
+  '|',
+  'link',
+  'unlink',
+  'table',
+  '|',
+  'img',
+  'video',
+];
+
+editor.config.uploadImgFileName = 'imgFile'
+editor.config.uploadImgUrl = '/upload'
+editor.create()
+</script>
